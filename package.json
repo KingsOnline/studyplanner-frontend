@@ -8,7 +8,7 @@
     "export": "next export",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "npm run build && npm run export && npx gh-pages -d out"
+    "deploy": "npm run build && npm run export && npm run build-storybook && node scripts/deploy.js"
   },
   "dependencies": {
     "next": "^15.5.4",
