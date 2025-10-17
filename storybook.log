@@ -1,0 +1,11 @@
+npm error code EEXIST
+npm error syscall rename
+npm error path /Users/paulwarren/.npm/_cacache/tmp/d5c7664f
+npm error dest /Users/paulwarren/.npm/_cacache/content-v2/sha512/5c/19/10c2f9a8b2dde16d73d7ef82290b498e8ead047397e1caf030b119091009d7662d0b9281d0df6302d04c83c15d28ef34e3bc2b3fe3fcc2b50d14e8ae362a
+npm error errno EEXIST
+npm error Invalid response body while trying to fetch https://registry.npmjs.org/@babel%2fplugin-transform-for-of: EACCES: permission denied, rename '/Users/paulwarren/.npm/_cacache/tmp/d5c7664f' -> '/Users/paulwarren/.npm/_cacache/content-v2/sha512/5c/19/10c2f9a8b2dde16d73d7ef82290b498e8ead047397e1caf030b119091009d7662d0b9281d0df6302d04c83c15d28ef34e3bc2b3fe3fcc2b50d14e8ae362a'
+npm error File exists: /Users/paulwarren/.npm/_cacache/content-v2/sha512/5c/19/10c2f9a8b2dde16d73d7ef82290b498e8ead047397e1caf030b119091009d7662d0b9281d0df6302d04c83c15d28ef34e3bc2b3fe3fcc2b50d14e8ae362a
+npm error Remove the existing file and try again, or run npm
+npm error with --force to overwrite files recklessly.
+
+npm error A complete log of this run can be found in: /Users/paulwarren/.npm/_logs/2024-09-12T14_49_00_901Z-debug-0.log

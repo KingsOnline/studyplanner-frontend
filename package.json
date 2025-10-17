@@ -1,0 +1,37 @@
+{
+  "name": "study-planner--components",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "deploy": "npm run build && npm run export && npx gh-pages -d out"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "4.1.1",
+    "@storybook/addon-docs": "9.1.10",
+    "@storybook/addon-links": "9.1.10",
+    "@storybook/addon-onboarding": "9.1.10",
+    "@storybook/addon-themes": "9.1.10",
+    "@storybook/auto-config": "0.0.3",
+    "@storybook/nextjs": "9.1.10",
+    "@types/node": "22.7.5",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "eslint": "9.12.0",
+    "eslint-config-next": "^15.5.4",
+    "eslint-plugin-storybook": "9.1.10",
+    "gh-pages": "^6.3.0",
+    "storybook": "9.1.10",
+    "styled-components": "^6.1.13",
+    "typescript": "5.6.3"
+  }
+}
