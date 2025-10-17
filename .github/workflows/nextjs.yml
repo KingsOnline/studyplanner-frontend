@@ -74,9 +74,7 @@ jobs:
 
       # 7️⃣ Build Next.js static export
       - name: Build with Next.js
-        run: |
-          ${{ steps.detect-package-manager.outputs.runner }} next build
-          ${{ steps.detect-package-manager.outputs.runner }} next export
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
       # 8️⃣ Build Storybook static files
       - name: Build Storybook
