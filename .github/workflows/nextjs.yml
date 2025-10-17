@@ -1,15 +1,8 @@
-# Workflow: Build & Deploy Next.js + Storybook to GitHub Pages
-# Docs: https://nextjs.org/docs/app/building-your-application/deploying/static-exports
-# Storybook: https://storybook.js.org/docs/react/sharing/publish-storybook
-
 name: Deploy Next.js + Storybook site to Pages
 
 on:
-  # Run on push to main branch
   push:
     branches: ["main"]
-
-  # Allow manual runs
   workflow_dispatch:
 
 permissions:
@@ -25,11 +18,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout code
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2️⃣ Detect package manager (npm or yarn)
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -45,49 +36,41 @@ jobs:
             echo "Unable to determine package manager" && exit 1
           fi
 
-      # 3️⃣ Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
-      # 4️⃣ Configure Pages (auto disables Next.js server-side features)
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
 
-      # 5️⃣ Restore cache for faster builds
       - name: Restore cache
         uses: actions/cache@v4
         with:
           path: |
             .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock', '**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock', '**/package-lock.json') }}-
 
-      # 6️⃣ Install dependencies
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      # 7️⃣ Build Next.js static export
-      - name: Build with Next.js
+      # Only run build — no next export
+      - name: Build Next.js static export
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
-      # 8️⃣ Build Storybook static files
       - name: Build Storybook
-        run: |
-          ${{ steps.detect-package-manager.outputs.runner }} build-storybook -o storybook-static
+        run: ${{ steps.detect-package-manager.outputs.runner }} build-storybook -o storybook-static
 
-      # 9️⃣ Move Storybook into /out directory
       - name: Merge Storybook into /out
         run: |
           mkdir -p out/storybook
           cp -r storybook-static/* out/storybook/
 
-      # 🔟 Upload everything (Next.js + Storybook)
       - name: Upload artifact for deployment
         uses: actions/upload-pages-artifact@v3
         with:
