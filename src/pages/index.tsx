@@ -129,10 +129,3 @@ export default function Page() {
     </div>
   );
 }
-export async function getServerSideProps() {
-  const userid = 2;
-  const res = await fetch(`http://localhost:3000/api?userid=${userid}`);
-  const apiResponse = await res.json();
-
-  return { props: { apiResponse } };
-}
