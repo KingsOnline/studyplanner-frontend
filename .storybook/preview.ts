@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/nextjs";
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import { createGlobalStyle } from 'styled-components';
+import "../src/styles/globals.css";
 
 const preview: Preview = {
   parameters: {

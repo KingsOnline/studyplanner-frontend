@@ -1,131 +1,65 @@
 "use client"; // if using App Router (optional but safe)
 import { useEffect, useState } from "react";
-
-type MoodleApiResponse = {
-  success: boolean;
-  error?: string;
-  users?: any[];
-  courses?: any[];
-};
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { CardHeader } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
+import { CardDescription } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card"; 
+import { Header } from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Page() {
-  const [apiResponse, setApiResponse] = useState<MoodleApiResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userid = 2;
-        const res = await fetch(`/api?userid=${userid}`); 
-        const data = await res.json();
-        console.log(data)        
-        setApiResponse(data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
-  if (loading) return <p>⏳ Loading...</p>;
-  if (error) return <p style={{ color: "red" }}>⚠️ {error}</p>;
-  if (!apiResponse) return <p>No data received.</p>;
-  
+  const cards = [
+    {
+      title: "Track Your Progress",
+      description: "Monitor completion and progress across all your courses.",
+    },
+    {
+      title: "Upcoming Deadlines",
+      description:
+        "Never miss an assignment deadline again with our reminders.",
+    },
+    {
+      title: "Join Webinars",
+      description:
+        "Discover and register for live learning events and webinars.",
+    },
+  ];
   return (
-    <div
-      style={{
-        overflowX: "auto",
-        overflowY: "hidden",
-        maxWidth: "100%",
-        border: "1px solid #ccc",
-        borderRadius: "8px",
-        padding: "0.5rem",
-      }}
-    >
-      {!apiResponse.success ? (
-        <p style={{ color: "red" }}>⚠️ {apiResponse.error}</p>
-      ) : (
-        <>
-          {apiResponse.users && apiResponse.users.length > 0 && (
-            <>
-              <h2>Courses</h2>
-              <table border={4} cellPadding={9} cellSpacing={20}>
-                <thead>
-                  <tr>
-                    <th>id</th>
-                    <th>categoryid</th>
-                    <th>categorysortorder</th>
-                    <th>fullname</th>
-                    <th>displayname</th>
-                    <th>idnumber</th>
-                    <th>summary</th>
-                    <th>summaryformat</th>
-                    <th>format</th>
-                    <th>showgrades</th>
-                    <th>newsitems</th>
-                    <th>startdate</th>
-                    <th>enddate</th>
-                    <th>numsections</th>
-                    <th>maxbytes</th>
-                    <th>showreports</th>
-                    <th>visible</th>
-                    <th>groupmode</th>
-                    <th>groupmodeforce</th>
-                    <th>defaultgroupingid</th>
-                    <th>timecreated</th>
-                    <th>timemodified</th>
-                    <th>enablecompletion</th>
-                    <th>completionnotify</th>
-                    <th>lang</th>
-                    <th>forcetheme</th>
-                    <th>courseformatoptions</th>
-                    <th>showactivitydates</th>
-                    <th>showcompletionconditions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {apiResponse.users.map((c) => (
-                    <tr key={c.id}>
-                      <td>{c.id}</td>
-                      <td>{c.categoryid}</td>
-                      <td>{c.categorysortorder}</td>
-                      <td>{c.fullname}</td>
-                      <td>{c.displayname}</td>
-                      <td>{c.idnumber}</td>
-                      <td>{c.summary}</td>
-                      <td>{c.summaryformat}</td>
-                      <td>{c.format}</td>
-                      <td>{c.showgrades}</td>
-                      <td>{c.newsitems}</td>
-                      <td>{c.startdate}</td>
-                      <td>{c.enddate}</td>
-                      <td>{c.numsections}</td>
-                      <td>{c.maxbytes}</td>
-                      <td>{c.showreports}</td>
-                      <td>{c.visible}</td>
-                      <td>{c.groupmode}</td>
-                      <td>{c.groupmodeforce}</td>
-                      <td>{c.defaultgroupingid}</td>
-                      <td>{c.timecreated}</td>
-                      <td>{c.timemodified}</td>
-                      <td>{c.enablecompletion}</td>
-                      <td>{c.completionnotify}</td>
-                      <td>{c.lang}</td>
-                      <td>{c.forcetheme}</td>
-                      <td>{JSON.stringify(c.courseformatoptions)}</td>
-                      <td>{c.showactivitydates}</td>
-                      <td>{c.showcompletionconditions}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </>
-          )}
-        </>
-      )}
-    </div>
+    <>
+      <main className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+        <Header />
+        <section className="flex flex-col items-center justify-center text-center mt-16 px-6">
+          <h2 className="text-3xl font-bold mb-4">
+            Welcome to Your Study Planner
+          </h2>
+          <p className="max-w-2xl text-gray-600 mb-8">
+            Organize your courses, manage tasks, and stay on top of deadlines —
+            all in one place.
+          </p>
+          <div className="w-full max-w-md">
+            <Input placeholder="Search courses or topics..." />
+          </div>
+        </section>
+        <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 px-6 mt-16 max-w-6xl mx-auto">
+          {cards.map((c, i) => (
+            <Card key={i}>
+              <CardHeader>
+                <CardTitle>{c.title}</CardTitle>
+                <CardDescription>{c.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  More details or stats can go here.
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </section>
+        <Footer />
+      </main>
+    </>
   );
 }
