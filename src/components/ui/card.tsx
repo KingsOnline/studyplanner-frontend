@@ -32,7 +32,7 @@ const CardHeader = React.forwardRef<
   >
     {/* Full-width image */}
     <img
-      src="/pic1.png"
+      src="${basePath}/pic1.png"
       alt="Header image"
       className="w-full h-48 object-cover"
     />

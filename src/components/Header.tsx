@@ -17,7 +17,7 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
   <header>
     <div className="storybook-header">
       <div>
-      <img src="/kingslogo.png" alt="Logo" className="w-[100px]" />
+      <img src="${basePath}/kingslogo.png" alt="Logo" className="w-[100px]" />
       </div>
       <div>
         {user ? (

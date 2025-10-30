@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true, // required for static exports
   },
-
+  // Uncomment the lines below if deploying to a subdirectory
   basePath: "/studyplanner-frontend",
   assetPrefix: "/studyplanner-frontend/",
 };
